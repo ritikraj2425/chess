@@ -1,5 +1,7 @@
 import { Chess } from "chess.js";
 import { GAME_OVER,MOVE,INIT_GAME } from "./messages";
+import {WebSocket} from 'ws';
+
 
 export class Game{
     public player1: WebSocket;
@@ -7,6 +9,7 @@ export class Game{
     private board: Chess
     private moves: string[];
     private startTime: Date;
+    private movesCount = 0;
 
     constructor(player1: WebSocket,player2: WebSocket){
         this.player1 = player1;
@@ -34,14 +37,14 @@ export class Game{
         from: string;
         to: string;}
     ){
-        if(this.board.moves.length % 2==0 && socket!==this.player1){
+        if(this.movesCount % 2==0 && socket!==this.player1){
             return
         }
-        if(this.board.moves.length%2 == 1 && socket!==this.player2){
+        if(this.movesCount%2 == 1 && socket!==this.player2){
             return
         }
         try{
-            this.board.move(move)
+            this.board.move(move);
         }catch(err){
             return err;
         }
@@ -65,7 +68,7 @@ export class Game{
 
         }
 
-        if(this.board.moves.length %2==0){
+        if(this.board.moves().length %2==0){
             this.player2.send(
                 JSON.stringify({
                     type: MOVE,
@@ -80,6 +83,7 @@ export class Game{
                 })
             )
         }
+        this.movesCount++;
 
     }
 }
