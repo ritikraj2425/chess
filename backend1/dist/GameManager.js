@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameManager = void 0;
 const messages_1 = require("./messages");
 const Game_1 = require("./Game");
-// User, Game
 class GameManager {
     constructor() {
         this.games = [];
