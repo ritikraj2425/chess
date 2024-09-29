@@ -2,7 +2,6 @@ import { WebSocket } from "ws";
 import { INIT_GAME, MOVE } from "./messages";
 import { Game } from "./Game";
 
-// User, Game
 
 export class GameManager {
     private games: Game[];
@@ -22,7 +21,6 @@ export class GameManager {
 
     removeUser(socket: WebSocket) {
         this.users = this.users.filter(user => user !== socket);
-
     }
 
     private addHandler(socket: WebSocket) {
