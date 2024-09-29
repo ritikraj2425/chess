@@ -3,7 +3,7 @@ import { INIT_GAME, MOVE } from "./messages";
 import { Game } from "./Game";
 
 
-export class GameManager {
+class GameManager {
     private games: Game[];
     private pendingUser: WebSocket | null;
     private users: WebSocket[];
@@ -48,3 +48,4 @@ export class GameManager {
         })
     }
 }
+module.exports = GameManager;

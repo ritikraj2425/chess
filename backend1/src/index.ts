@@ -1,5 +1,5 @@
-import { WebSocketServer } from 'ws';
-import { GameManager } from './GameManager';
+import { WebSocketServer } from "ws";
+const GameManager = require('./GameManager')
 
 const wss = new WebSocketServer({ port: 3002});
 
