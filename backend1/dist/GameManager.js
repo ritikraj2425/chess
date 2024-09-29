@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GameManager = void 0;
-const Game_1 = require("./Game");
 const messages_1 = require("./messages");
+const Game_1 = require("./Game");
+// User, Game
 class GameManager {
     constructor() {
         this.games = [];
@@ -14,10 +15,10 @@ class GameManager {
         this.addHandler(socket);
     }
     removeUser(socket) {
-        this.users = this.users.filter((user) => user !== socket);
+        this.users = this.users.filter(user => user !== socket);
     }
     addHandler(socket) {
-        socket.on('message', (data) => {
+        socket.on("message", (data) => {
             const message = JSON.parse(data.toString());
             if (message.type === messages_1.INIT_GAME) {
                 if (this.pendingUser) {
@@ -30,9 +31,11 @@ class GameManager {
                 }
             }
             if (message.type === messages_1.MOVE) {
-                const game = this.games.find((game) => game.player1 === socket || game.player2 === socket);
+                console.log("inside move");
+                const game = this.games.find(game => game.player1 === socket || game.player2 === socket);
                 if (game) {
-                    game.makeMove(socket, message.move);
+                    console.log("inside makemove");
+                    game.makeMove(socket, message.payload.move);
                 }
             }
         });
